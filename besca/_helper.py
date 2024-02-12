@@ -5,7 +5,7 @@ from pandas import DataFrame, concat
 from scipy import sparse
 from math import expm1
 from numpy import sort
-from distutils.version import StrictVersion
+from packaging import version
 import scanpy as sc
 from collections import namedtuple
 import re
@@ -501,12 +501,12 @@ def print_software_versions() -> namedtuple:
     """
 
     scv = sc.__version__
-    if StrictVersion(scv) >= "1.6":
+    if version.parse(scv) >= "1.6":
         sc.logging.print_header()
     else:
         sc.logging.print_versions()
     bcver = get_versions()["version"]
-    bcstr = StrictVersion(re.sub("\\+.*$", "", bcver))
+    bcstr = version.parse(re.sub("\\+.*$", "", bcver))
     print(f"besca=={bcstr}\nmatplotlib=={matplotlib.__version__}")
     Versions = namedtuple("Versions", ["scanpy", "besca"])
     return Versions(scanpy=scv, besca=bcver)
