@@ -501,7 +501,7 @@ def print_software_versions() -> namedtuple:
     """
 
     scv = sc.__version__
-    if version.parse(scv) >= "1.6":
+    if version.parse(scv) >= version.parse("1.6"):
         sc.logging.print_header()
     else:
         sc.logging.print_versions()
